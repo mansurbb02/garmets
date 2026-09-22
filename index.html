@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bulk / Exchange — Collective garment buying</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ ICON DEFS (technical garment flats) ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+  <symbol id="icon-tee" viewBox="0 0 200 220">
+    <path d="M40,32 L72,10 Q100,-2 128,10 L160,32 L192,58 L164,85 L148,68 L148,196 Q100,208 52,196 L52,68 L36,85 L8,58 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M82,10 Q100,26 118,10" fill="none" stroke="currentColor" stroke-width="3"/>
+  </symbol>
+  <symbol id="icon-hoodie" viewBox="0 0 200 220">
+    <path d="M70,26 Q100,-16 130,26" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    <path d="M44,34 L74,14 Q100,4 126,14 L156,34 L190,60 L162,88 L146,70 L146,198 Q100,210 54,198 L54,70 L38,88 L10,60 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+    <rect x="72" y="128" width="56" height="34" rx="4" fill="none" stroke="currentColor" stroke-width="2.5"/>
+    <line x1="92" y1="46" x2="88" y2="90" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="108" y1="46" x2="112" y2="90" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="icon-cargo" viewBox="0 0 200 220">
+    <rect x="62" y="8" width="76" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="3"/>
+    <path d="M62,28 L60,196 L88,196 L94,112 L100,112 L100,28 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M138,28 L140,196 L112,196 L106,112 L100,112 L100,28 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+    <rect x="42" y="88" width="30" height="38" rx="3" fill="none" stroke="currentColor" stroke-width="2.5"/>
+    <line x1="42" y1="100" x2="72" y2="100" stroke="currentColor" stroke-width="2"/>
+  </symbol>
+  <symbol id="icon-cargo-oversized" viewBox="0 0 240 260">
+    <rect x="66" y="10" width="108" height="24" rx="2" fill="none" stroke="currentColor" stroke-width="3.5"/>
+    <path d="M66,34 L58,232 L100,232 L108,132 L120,132 L120,34 Z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M174,34 L182,232 L140,232 L132,132 L120,132 L120,34 Z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/>
+    <rect x="34" y="104" width="40" height="50" rx="4" fill="none" stroke="currentColor" stroke-width="3"/>
+    <line x1="34" y1="120" x2="74" y2="120" stroke="currentColor" stroke-width="2.5"/>
+    <rect x="166" y="104" width="40" height="50" rx="4" fill="none" stroke="currentColor" stroke-width="3"/>
+    <line x1="166" y1="120" x2="206" y2="120" stroke="currentColor" stroke-width="2.5"/>
+  </symbol>
+  <symbol id="icon-solo" viewBox="0 0 160 160">
+    <line x1="80" y1="10" x2="80" y2="34" stroke="currentColor" stroke-width="3"/>
+    <path d="M80,10 L100,26 L60,26 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M40,34 L60,22 Q80,14 100,22 L120,34 L136,52 L118,68 L108,58 L108,140 Q80,148 52,140 L52,58 L42,68 L24,52 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="icon-group" viewBox="0 0 220 160">
+    <g transform="translate(0,6) scale(0.72)">
+      <path d="M40,34 L60,22 Q80,14 100,22 L120,34 L136,52 L118,68 L108,58 L108,140 Q80,148 52,140 L52,58 L42,68 L24,52 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+    </g>
+    <g transform="translate(80,0) scale(0.72)">
+      <path d="M40,34 L60,22 Q80,14 100,22 L120,34 L136,52 L118,68 L108,58 L108,140 Q80,148 52,140 L52,58 L42,68 L24,52 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+    </g>
+    <g transform="translate(148,10) scale(0.72)">
+      <path d="M40,34 L60,22 Q80,14 100,22 L120,34 L136,52 L118,68 L108,58 L108,140 Q80,148 52,140 L52,58 L42,68 L24,52 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+    </g>
+    <line x1="8" y1="152" x2="212" y2="152" stroke="currentColor" stroke-width="2" stroke-dasharray="4 5"/>
+  </symbol>
+</defs>
+</svg>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="wrap nav-row">
+    <a href="#top" class="brand">BULK<span>/</span>EXCHANGE</a>
+    <nav class="center-links">
+      <a href="#orders">Group orders</a>
+      <a href="#auctions">Auctions</a>
+      <a href="#how">How it works</a>
+    </nav>
+    <div class="nav-right">
+      <a href="#sell" class="sell-link">Sell with us →</a>
+      <a href="#orders" class="btn btn-ink">Join a group</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<div id="top" class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <p class="hero-eyebrow">Collective purchasing for local fashion sellers</p>
+      <h1 class="display">BUY<br>TOGETHER.</h1>
+      <p class="hero-sub">Small orders. Factory-scale access. Pool your quantity with other sellers until the lot reaches the factory's minimum — then the factory produces, and everyone gets their share.</p>
+      <div class="hero-cta">
+        <a href="#orders" class="btn btn-ink">Join a group order</a>
+        <a href="#how" class="btn btn-outline">How it works</a>
+      </div>
+    </div>
+    <div class="hero-figure" aria-hidden="true">
+      <svg viewBox="0 0 200 220" style="width:60%;color:var(--ink);opacity:.9;">
+        <use href="#icon-tee"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ============ STATS STRIP ============ -->
+<div class="stats-strip">
+  <div class="wrap">
+    <div class="stats-row">
+      <div class="stat-cell">
+        <span class="stat-value mono">2,000 PCS</span>
+        <span class="stat-label">MOQ</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-value mono">47</span>
+        <span class="stat-label">Sellers joined</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-value mono">620 PCS</span>
+        <span class="stat-label">Remaining</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-value mono" id="hero-countdown" data-seconds="1122" data-format="ms">18:42</span>
+        <span class="stat-label">Closes in</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="display-2">Four steps<br>to factory scale.</h2>
+      <p class="section-intro">No showroom minimums. No factory back-and-forth. Just your quantity, added to everyone else's.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title-row">
+          <svg class="step-icon" viewBox="0 0 200 220" style="color:var(--ink);"><use href="#icon-tee"/></svg>
+          <div class="step-title">Find</div>
+        </div>
+        <div class="step-desc">Choose a factory-ready garment lot and see exactly how far it is from its minimum.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title-row">
+          <svg class="step-icon" viewBox="0 0 200 220" style="color:var(--ink);"><use href="#icon-hoodie"/></svg>
+          <div class="step-title">Join</div>
+        </div>
+        <div class="step-desc">Reserve only the quantity you actually need — 50 pieces or 500.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title-row">
+          <svg class="step-icon" viewBox="0 0 200 220" style="color:var(--ink);"><use href="#icon-cargo"/></svg>
+          <div class="step-title">Fill</div>
+        </div>
+        <div class="step-desc">Once the collective order reaches factory MOQ, production is confirmed.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-title-row">
+          <svg class="step-icon" viewBox="0 0 160 160" style="color:var(--ink);"><use href="#icon-solo"/></svg>
+          <div class="step-title">Receive</div>
+        </div>
+        <div class="step-desc">Your exact share ships out with the group's production run.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIVE GROUP ORDERS ============ -->
+<section id="orders">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="display-2">What's<br>moving.</h2>
+      <p class="section-intro">Live group orders, filling right now. Join before the lot closes or the MOQ is reached.</p>
+    </div>
+
+    <div class="order-list">
+      <div class="order-row">
+        <div class="order-idx">01</div>
+        <div>
+          <div class="order-name">Oversized Heavy Tee</div>
+          <div class="order-progress"><div class="order-progress-fill" style="width:69%"></div></div>
+        </div>
+        <svg class="order-icon garment-icon" viewBox="0 0 200 220" style="color:var(--slate);"><use href="#icon-tee"/></svg>
+        <div class="order-stats">
+          <div class="order-stat"><div class="label">MOQ</div><div class="val">2,000</div></div>
+          <div class="order-stat"><div class="label">Joined</div><div class="val">1,380</div></div>
+          <div class="order-stat"><div class="label">Left</div><div class="val">620</div></div>
+          <div class="order-stat deadline"><div class="label">Deadline</div><div class="val mono" data-seconds="67329" data-format="hms">18:42:09</div></div>
+        </div>
+        <a href="#" class="order-join">Join →</a>
+      </div>
+
+      <div class="order-row">
+        <div class="order-idx">02</div>
+        <div>
+          <div class="order-name">Relaxed Cargo</div>
+          <div class="order-progress"><div class="order-progress-fill" style="width:63%"></div></div>
+        </div>
+        <svg class="order-icon garment-icon" viewBox="0 0 200 220" style="color:var(--slate);"><use href="#icon-cargo"/></svg>
+        <div class="order-stats">
+          <div class="order-stat"><div class="label">MOQ</div><div class="val">1,500</div></div>
+          <div class="order-stat"><div class="label">Joined</div><div class="val">940</div></div>
+          <div class="order-stat"><div class="label">Left</div><div class="val">560</div></div>
+          <div class="order-stat deadline"><div class="label">Deadline</div><div class="val mono" data-seconds="8071" data-format="hms">02:14:31</div></div>
+        </div>
+        <a href="#" class="order-join">Join →</a>
+      </div>
+
+      <div class="order-row">
+        <div class="order-idx">03</div>
+        <div>
+          <div class="order-name">French Terry Hoodie</div>
+          <div class="order-progress"><div class="order-progress-fill" style="width:91%"></div></div>
+        </div>
+        <svg class="order-icon garment-icon" viewBox="0 0 200 220" style="color:var(--slate);"><use href="#icon-hoodie"/></svg>
+        <div class="order-stats">
+          <div class="order-stat"><div class="label">MOQ</div><div class="val">3,000</div></div>
+          <div class="order-stat"><div class="label">Joined</div><div class="val">2,740</div></div>
+          <div class="order-stat"><div class="label">Left</div><div class="val">260</div></div>
+          <div class="order-stat deadline"><div class="label">Deadline</div><div class="val mono" data-seconds="25782" data-format="hms">07:09:42</div></div>
+        </div>
+        <a href="#" class="order-join">Join →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AUCTION TRANSITION ============ -->
+<section class="auction-transition" id="auctions">
+  <div class="wrap">
+    <p class="transition-line">Missed<br>the order?</p>
+    <p class="transition-mid">Cancelled factory lots don't disappear. Production that already happened doesn't go to waste.</p>
+    <p class="transition-line transition-final">They go<br>to auction.</p>
+  </div>
+</section>
+
+<!-- ============ AUCTION LOT ============ -->
+<section class="auction-block">
+  <div class="wrap">
+    <div class="auction-panel">
+      <div>
+        <div class="lot-tag">LOT / 047</div>
+        <h3 class="lot-name">Oversized Cargo</h3>
+        <div class="lot-qty">1,240 PCS · CANCELLED FACTORY ORDER</div>
+        <div class="lot-meta">
+          <div>
+            <div class="label">Current bid</div>
+            <div class="val mono">৳ 284,000</div>
+          </div>
+          <div>
+            <div class="label">Bidders</div>
+            <div class="val mono">08</div>
+          </div>
+          <div>
+            <div class="label">Ends in</div>
+            <div class="val mono" data-seconds="1308" data-format="hms">00:21:48</div>
+          </div>
+          <div>
+            <div class="label">Per piece</div>
+            <div class="val mono">৳ 229</div>
+          </div>
+        </div>
+        <div class="lot-cta">
+          <a href="#" class="btn btn-lime">Bid on lot →</a>
+          <a href="#" class="btn btn-outline on-ink">Join with others →</a>
+        </div>
+      </div>
+      <div class="auction-visual">
+        <svg viewBox="0 0 240 260" style="color:var(--lime);"><use href="#icon-cargo-oversized"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ONE LOT, YOUR WAY ============ -->
+<section class="split-block">
+  <div class="wrap">
+    <div class="split-head">
+      <h2 class="display-2">One lot.<br>Your way.</h2>
+    </div>
+    <div class="split-toggle" role="group" aria-label="Choose how to take this lot">
+      <button class="split-option" type="button" data-target="solo" aria-pressed="true">
+        <div class="split-option-title">
+          <svg width="28" height="28" viewBox="0 0 160 160" style="color:currentColor;"><use href="#icon-solo"/></svg>
+          Buy solo
+        </div>
+        <div class="split-option-desc">Take the full lot yourself. No splitting, no waiting on others.</div>
+      </button>
+      <button class="split-option" type="button" data-target="group" aria-pressed="false">
+        <div class="split-option-title">
+          <svg width="34" height="24" viewBox="0 0 220 160" style="color:currentColor;"><use href="#icon-group"/></svg>
+          Build a group
+        </div>
+        <div class="split-option-desc">Split the lot with other sellers, each taking a share of the quantity.</div>
+      </button>
+    </div>
+    <div class="split-visual">
+      <svg id="split-visual-solo" viewBox="0 0 160 160" style="color:var(--lime);"><use href="#icon-solo"/></svg>
+      <svg id="split-visual-group" viewBox="0 0 220 160" style="color:var(--lime);display:none;"><use href="#icon-group"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="final-cta">
+  <div class="wrap">
+    <h2 class="display-2">Don't wait<br>for MOQ.</h2>
+    <p>Join the next order, or find your next lot at auction.</p>
+    <div class="final-cta-actions">
+      <a href="#orders" class="btn btn-ink">Explore group orders →</a>
+      <a href="#auctions" class="btn btn-outline">View auctions</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer id="sell">
+  <div class="wrap">
+    <div class="footer-row">
+      <div>
+        <div class="footer-brand">BULK / EXCHANGE</div>
+        <div class="footer-copy">A collective purchasing exchange for local fashion sellers.</div>
+      </div>
+      <div class="footer-links">
+        <a href="#orders">Group orders</a>
+        <a href="#auctions">Auctions</a>
+        <a href="#how">How it works</a>
+        <a href="#">Sell with us</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
